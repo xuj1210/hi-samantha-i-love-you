@@ -100,7 +100,9 @@
 
         noButton.addEventListener('click', () => {
             // noButton.style.display = 'none';
-            noButton.classList.add('clicked')
+            noButton.classList.add('clicked');
+            noButton.removeEventListener('mouseover');
+            noButton.textContent = 'Yes';
         });
 
         yesButton.addEventListener('click', () => {
