@@ -70,7 +70,8 @@
 
             const distance = Math.sqrt(offsetX ** 2 + offsetY ** 2);
 
-            const moveDistance = Math.min(600, distance); // Limit movement distance
+            const moveDistance = Math.min(1000, distance); // Limit movement distance
+            moveDistance = distance;
             const angle = Math.atan2(offsetY, offsetX);
 
             const newX = Math.max(0, Math.min(containerRect.width - buttonRect.width, buttonRect.left + moveDistance * Math.cos(angle)));
