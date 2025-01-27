@@ -56,11 +56,61 @@
             }
         }
     </style>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+                text-align: center;
+            }
+            .container {
+                text-align: center;
+            }
+            .image-placeholder {
+                width: 200px;
+                height: 200px;
+                background-color: #ccc;
+                margin-bottom: 20px;
+            }
+            .question {
+                font-size: 48px;
+                font-weight: bold;
+                margin: 20px 0;
+            }
+            .buttons {
+                margin-top: 20px;
+            }
+            button {
+                padding: 15px 30px;
+                font-size: 18px;
+                margin: 10px;
+                cursor: pointer;
+                border: none;
+                border-radius: 5px;
+            }
+            .yes-button {
+                background-color: #4caf50;
+                color: white;
+            }
+            .no-button {
+                background-color: #ff4d4d;
+                color: white;
+            }
+        </style>
+    
 </head>
 <body>
     <div class="container">
-        <button class="no-button">No</button>
-        <button class="yes-button">Yes</button>
+        <div class="image-placeholder"></div>
+        <div class="question">Will you be my Valentine?</div>
+        <div class="buttons">
+            <button class="yes-button">Yes</button>
+            <button class="no-button">No</button>
+        </div>
     </div>
 
     <script>
