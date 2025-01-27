@@ -21,7 +21,7 @@
             height: 100%;
         }
         .no-button, .yes-button {
-            position: absolute;
+            /* position: absolute; */
             padding: 10px 20px;
             font-size: 16px;
             border: none;
@@ -92,11 +92,6 @@
         const yesButton = document.querySelector('.yes-button');
         const container = document.querySelector('.container');
 
-        // Position the Yes button next to the No button initially
-        yesButton.style.left = '100px';
-        yesButton.style.top = '100px';
-        noButton.style.left = '50px';
-        noButton.style.top = '100px';
 
         function moveOnHover(event) {
             const containerRect = container.getBoundingClientRect();
