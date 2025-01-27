@@ -33,7 +33,7 @@
             color: white;
             transition: transform 0.2s ease, left 0.3s ease, top 0.3s ease;
         }
-        .yes-button {
+        .yes-button, .clicked {
             background-color: #4caf50;
             color: white;
         }
@@ -99,10 +99,8 @@
         });
 
         noButton.addEventListener('click', () => {
-            noButton.style.display = 'none';
-            yesButton.style.display = 'block';
-            yesButton.style.left = noButton.style.left;
-            yesButton.style.top = noButton.style.top;
+            // noButton.style.display = 'none';
+            noButton.classList.add('clicked')
         });
 
         yesButton.addEventListener('click', () => {
