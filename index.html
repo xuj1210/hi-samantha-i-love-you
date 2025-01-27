@@ -30,7 +30,7 @@
         .no-button {
             background-color: #ff4d4d;
             color: white;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, left 0.3s ease, top 0.3s ease;
         }
         .yes-button {
             background-color: #4caf50;
@@ -55,18 +55,29 @@
         noButton.style.left = '50px';
         noButton.style.top = '100px';
 
-        noButton.addEventListener('mouseover', () => {
+        noButton.addEventListener('mouseover', (event) => {
             const containerRect = container.getBoundingClientRect();
             const buttonRect = noButton.getBoundingClientRect();
 
-            const maxX = containerRect.width - buttonRect.width;
-            const maxY = containerRect.height - buttonRect.height;
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
 
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
+            const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+            const buttonCenterY = buttonRect.top + buttonRect.height / 2;
 
-            noButton.style.left = `${randomX}px`;
-            noButton.style.top = `${randomY}px`;
+            const offsetX = buttonCenterX - mouseX;
+            const offsetY = buttonCenterY - mouseY;
+
+            const distance = Math.sqrt(offsetX ** 2 + offsetY ** 2);
+
+            const moveDistance = Math.min(100, distance); // Limit movement distance
+            const angle = Math.atan2(offsetY, offsetX);
+
+            const newX = Math.max(0, Math.min(containerRect.width - buttonRect.width, buttonRect.left + moveDistance * Math.cos(angle)));
+            const newY = Math.max(0, Math.min(containerRect.height - buttonRect.height, buttonRect.top + moveDistance * Math.sin(angle)));
+
+            noButton.style.left = `${newX - containerRect.left}px`;
+            noButton.style.top = `${newY - containerRect.top}px`;
         });
     </script>
 </body>
