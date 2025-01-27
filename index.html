@@ -36,7 +36,7 @@
         .yes-button, .clicked {
             background-color: #4caf50;
             color: white;
-            z-index: 2;
+            z-index: 100;
         }
         .confetti {
             position: absolute;
@@ -110,7 +110,7 @@
             if (!addedOnClick) {
                 addedOnClick = true;
                 noButton.addEventListener('click', () => {
-                    for (let i = 0; i < 30; i++) {
+                    for (let i = 0; i < 15; i++) {
                         createConfetti();
                     }
                 })
@@ -118,7 +118,7 @@
         });
 
         yesButton.addEventListener('click', () => {
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 15; i++) {
                 createConfetti();
             }
         });
