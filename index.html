@@ -42,7 +42,7 @@
             width: 100px;
             height: 100px;
             background-size: cover;
-            animation: fall 3s linear infinite;
+            animation: fall 3s linear 1;
         }
         @keyframes fall {
             0% {
@@ -109,7 +109,7 @@
             if (!addedOnClick) {
                 addedOnClick = true;
                 noButton.addEventListener('click', () => {
-                    for (let i = 0; i < 5; i++) {
+                    for (let i = 0; i < 30; i++) {
                         createConfetti();
                     }
                 })
@@ -117,7 +117,7 @@
         });
 
         yesButton.addEventListener('click', () => {
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 30; i++) {
                 createConfetti();
             }
         });
@@ -135,7 +135,7 @@
 
             setTimeout(() => {
                 confetti.remove();
-            }, 3000);
+            }, 5000);
         }
     </script>
 </body>
