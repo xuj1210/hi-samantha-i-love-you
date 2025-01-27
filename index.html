@@ -99,17 +99,21 @@
         }
 
         noButton.addEventListener('mouseover', moveOnHover);
+        let addedOnClick = false;
 
         noButton.addEventListener('click', () => {
             // noButton.style.display = 'none';
             noButton.classList.add('clicked');
             noButton.removeEventListener('mouseover', moveOnHover);
             noButton.textContent = `Yes`;
-            noButton.addEventListener('click', () => {
-                for (let i = 0; i < 5; i++) {
-                    createConfetti();
-                }
-            })
+            if (!addedOnClick) {
+                addedOnClick = true;
+                noButton.addEventListener('click', () => {
+                    for (let i = 0; i < 5; i++) {
+                        createConfetti();
+                    }
+                })
+            }
         });
 
         yesButton.addEventListener('click', () => {
@@ -129,9 +133,9 @@
 
             container.appendChild(confetti);
 
-            setTimeout(() => {
-                confetti.remove();
-            }, 5000);
+            // setTimeout(() => {
+            //     confetti.remove();
+            // }, 5000);
         }
     </script>
 </body>
