@@ -41,7 +41,7 @@
 <body>
     <div class="container">
         <button class="no-button">No</button>
-        <button class="yes-button">Yes</button>
+        <button class="yes-button" style="display: none;">Yes</button>
     </div>
 
     <script>
@@ -70,7 +70,7 @@
 
             const distance = Math.sqrt(offsetX ** 2 + offsetY ** 2);
 
-            const moveDistance = Math.min(600, distance * 4); // Limit movement distance
+            const moveDistance = Math.min(600, distance * 5); // Limit movement distance
             const angle = Math.atan2(offsetY, offsetX);
 
             const newX = Math.max(0, Math.min(containerRect.width - buttonRect.width, buttonRect.left + moveDistance * Math.cos(angle)));
@@ -78,6 +78,13 @@
 
             noButton.style.left = `${newX - containerRect.left}px`;
             noButton.style.top = `${newY - containerRect.top}px`;
+        });
+
+        noButton.addEventListener('click', () => {
+            noButton.style.display = 'none';
+            yesButton.style.display = 'block';
+            yesButton.style.left = noButton.style.left;
+            yesButton.style.top = noButton.style.top;
         });
     </script>
 </body>
