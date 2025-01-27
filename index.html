@@ -105,10 +105,15 @@
             noButton.classList.add('clicked');
             noButton.removeEventListener('mouseover', moveOnHover);
             noButton.textContent = `Yes`;
+            noButton.addEventListener('click', () => {
+                for (let i = 0; i < 5; i++) {
+                    createConfetti();
+                }
+            })
         });
 
         yesButton.addEventListener('click', () => {
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 5; i++) {
                 createConfetti();
             }
         });
