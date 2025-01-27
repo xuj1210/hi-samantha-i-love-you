@@ -73,7 +73,7 @@
         noButton.style.left = '50px';
         noButton.style.top = '100px';
 
-        noButton.addEventListener('mouseover', (event) => {
+        function moveOnHover(event) {
             const containerRect = container.getBoundingClientRect();
             const buttonRect = noButton.getBoundingClientRect();
 
@@ -96,13 +96,15 @@
 
             noButton.style.left = `${newX - containerRect.left}px`;
             noButton.style.top = `${newY - containerRect.top}px`;
-        });
+        }
+
+        noButton.addEventListener('mouseover', moveOnHover);
 
         noButton.addEventListener('click', () => {
             // noButton.style.display = 'none';
             noButton.classList.add('clicked');
-            noButton.removeEventListener('mouseover');
-            noButton.textContent = 'Yes';
+            noButton.removeEventListener('mouseover', moveOnHover);
+            noButton.textContent = `Yes`;
         });
 
         yesButton.addEventListener('click', () => {
