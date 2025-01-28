@@ -137,7 +137,9 @@
                 image.src = "kiss-cute.gif"
                 image.style.width = "252px"
                 image.style.height = "200px"
-                question.textContent = "YAYYYY I LOVE U CANT WAIT TO BE WITH YOU <333"
+                const kissStr = `<span style="font-size: 12px;">(and give your ${promptIdx - 9} kiss${promptIdx > 10 ? "es" : ""})</span>`
+                question.innerHTML = `YAYYYY I LOVE U CANT WAIT TO BE WITH YOU <333`
+                if (promptIdx > 9) { question.innerHTML += kissStr }
                 yesButton.textContent = "Click for more Loopy"
                 noButton.style.display = "None"
                 // wrapper.style.backgroundImage = "IMG_6395.jpeg"
