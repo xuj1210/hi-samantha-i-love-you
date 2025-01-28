@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moving No Button</title>
+    <title>Hi Samantha</title>
     <style>
         body {
             display: flex;
@@ -12,34 +12,50 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            overflow: hidden;
+            /* background-color: #f0f0f0; */
+            text-align: center;
         }
-        .container {
+        .wrapper {
             position: relative;
             width: 100%;
             height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .no-button, .yes-button {
-            /* position: absolute; */
-            padding: 10px 20px;
-            font-size: 16px;
+        .container {
+            text-align: center;
+        }
+        .image-placeholder {
+            /* width: 300px; */
+            height: 200px;
+            /* background-color: #ccc; */
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
         }
-        .no-button {
-            background-color: #ff4d4d;
-            color: white;
-            transition: transform 0.2s ease, left 0.3s ease, top 0.3s ease;
-        }
-        .yes-button, .clicked {
+        .yes-button {
             background-color: #4caf50;
             color: white;
             z-index: 100;
         }
-        .buttons {
-            margin-top: 20px;
+        .no-button {
+            background-color: #ff4d4d;
+            color: white;
         }
         .confetti {
             position: absolute;
@@ -58,85 +74,75 @@
                 opacity: 0;
             }
         }
+
     </style>
-        <style>
-            .container {
-                text-align: center;
-            }
-            .image-placeholder {
-                width: 200px;
-                height: 200px;
-                background-color: #ccc;
-                margin-bottom: 20px;
-            }
-            .question {
-                font-size: 48px;
-                font-weight: bold;
-                margin: 20px 0;
-            }
-        </style>
-    
 </head>
 <body>
-    <div class="container">
-        <div class="image-placeholder"></div>
-        <div class="question">Will you be my Valentine?</div>
-        <div class="buttons">
-            <button class="yes-button">Yes</button>
-            <button class="no-button">No</button>
+    <div class="wrapper">
+
+        <div class="container">
+            <img class="image-placeholder" src="peach-and-goma-goma.gif"/>
+            <div class="question">Will you be my Valentine?</div>
+            <div class="buttons">
+                <button class="yes-button">Yes</button>
+                <button class="no-button">No</button>
+            </div>
         </div>
     </div>
-
     <script>
         const noButton = document.querySelector('.no-button');
         const yesButton = document.querySelector('.yes-button');
-        const container = document.querySelector('.container');
+        const wrapper = document.querySelector('.wrapper');
+        const image = document.querySelector('.image-placeholder')
+        const question = document.querySelector('.question');
 
+        let promptIdx = 0;
 
-        function moveOnHover(event) {
-            const containerRect = container.getBoundingClientRect();
-            const buttonRect = noButton.getBoundingClientRect();
+        function cyclePrompt() {
+            const prompts = [
+                `are you sure`,
+                `are you REALLY sure`,
+                `like 100%`,
+                `like being so fr`,
+                `i knew it you hate me`,
+                `press no again i might crash out`,
+                `ok currently crashing out`,
+                `doesnt the yes button look so pretty`,
+                `ik you want to click it`,
+                `i'll give you ${promptIdx - 8} kiss if you click yes`,
+                `how about ${promptIdx - 8}`,
+                `ok ${promptIdx - 8}`
+            ]
+            question.textContent = prompts[Math.min(11, promptIdx)]
+            ++promptIdx;
 
-            const mouseX = event.clientX;
-            const mouseY = event.clientY;
+            const currentWidth = image.offsetWidth;
+            const currentHeight = image.offsetHeight;
+            console.log(currentWidth, currentHeight)
 
-            const buttonCenterX = buttonRect.left + buttonRect.width / 2;
-            const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+            const newWidth = Math.max(currentWidth * 0.9, 1);
+            const newHeight = Math.max(currentHeight * 0.9, 1);
 
-            const offsetX = buttonCenterX - mouseX;
-            const offsetY = buttonCenterY - mouseY;
-
-            const distance = Math.sqrt(offsetX ** 2 + offsetY ** 2);
-
-            const moveDistance = Math.min(600, distance * 5); // Limit movement distance
-            const angle = Math.atan2(offsetY, offsetX);
-
-            const newX = Math.max(0, Math.min(containerRect.width - buttonRect.width, buttonRect.left + moveDistance * Math.cos(angle)));
-            const newY = Math.max(0, Math.min(containerRect.height - buttonRect.height, buttonRect.top + moveDistance * Math.sin(angle)));
-
-            noButton.style.left = `${newX - containerRect.left}px`;
-            noButton.style.top = `${newY - containerRect.top}px`;
+            image.style.width = newWidth + 'px';
+            image.style.height = newHeight + 'px';
         }
 
-        noButton.addEventListener('mouseover', moveOnHover);
-        let addedOnClick = false;
+        noButton.addEventListener('click', cyclePrompt)
 
-        noButton.addEventListener('click', () => {
-            // noButton.style.display = 'none';
-            noButton.classList.add('clicked');
-            noButton.removeEventListener('mouseover', moveOnHover);
-            noButton.textContent = `Yes`;
-            if (!addedOnClick) {
-                addedOnClick = true;
-                noButton.addEventListener('click', () => {
-                    for (let i = 0; i < 15; i++) {
-                        createConfetti();
-                    }
-                })
-            }
-        });
+        let yes = false;
 
         yesButton.addEventListener('click', () => {
+            if (!yes) {
+                yes = true;
+                image.src = "kiss-cute.gif"
+                image.style.width = "252px"
+                image.style.height = "200px"
+                question.textContent = "YAYYYY I LOVE U CANT WAIT TO BE WITH YOU <333"
+                yesButton.textContent = "Click for more Loopy"
+                noButton.style.display = "None"
+                // wrapper.style.backgroundImage = "IMG_6395.jpeg"
+            }
+
             for (let i = 0; i < 15; i++) {
                 createConfetti();
             }
@@ -151,12 +157,13 @@
             confetti.style.animationDuration = `${Math.random() * 2 + 2}s`;
             confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
 
-            container.appendChild(confetti);
+            wrapper.appendChild(confetti);
 
             setTimeout(() => {
                 confetti.remove();
             }, 5000);
         }
     </script>
+
 </body>
 </html>
